@@ -1,0 +1,52 @@
+{
+  "project": {
+    "version": "1.0.0-beta.17",
+    "name": "Genie3"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": "assets",
+      "index": "index.html",
+      "main": "main.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.json",
+      "prefix": "app",
+      "mobile": false,
+      "styles": [
+        "./assets/lib/perfect-scrollbar/css/perfect-scrollbar.min.css",
+        "./assets/lib/material-design-icons/css/material-design-iconic-font.min.css",
+        "./assets/lib/jquery.gritter/css/jquery.gritter.css",
+        "../node_modules/ng2-slim-loading-bar/style.css",
+        "./assets/css/vertical-rhythm.min.css",
+        "./assets/font-awesome/css/font-awesome.min.css",
+        "./assets/css/style.css",
+        "styles.css"
+      ],
+      "scripts": [
+      ],
+      "environments": {
+        "source": "environments/environment.ts",
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "addons": [],
+  "packages": [],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "prefixInterfaces": false
+  }
+}

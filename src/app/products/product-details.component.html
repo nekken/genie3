@@ -1,0 +1,147 @@
+<app-product-edit-popup #addpopup></app-product-edit-popup>
+
+<div class="page-head-wrapper">
+<div class="page-head">
+  <div class="row">
+    <div class="col-md-7">
+      <h2  *ngIf="product" class="page-head-title">{{ product.title }}</h2>
+      <ol class="breadcrumb page-head-nav">
+        <li><a routerLink="/home"><span class="mdi mdi-home"></span></a></li>
+        <li><a routerLink="/products">Produits</a></li>
+        <li *ngIf="product" class="active">{{ product.sku }}</li>
+      </ol>
+    </div>
+    <div *ngIf="product" class="col-md-4 col-md-offset-1 text-right">
+      <button (click)="addpopup.popup(product)" class="btn btn-rounded- btn-space- btn-primary btn-big"><i class="icon mdi mdi-edit"></i> Éditer </button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="main-content container-fluid" style="margin-top: 107px;">
+  <div class="row">
+
+    <!-- Historique -->
+    <div class="col-xs-12 col-md-8">
+      <div class="panel panel-contrast">
+        <div class="panel-heading panel-heading-contrast">
+          Dernières activités
+
+          <div class="tools">
+            <a class="btn btn-primary" href="#">Ajouter une note</a>
+
+
+          </div>
+          <span class="panel-subtitle">
+            Activité des 30 dernières journées dans
+
+          <div class="btn-group btn-hspace">
+            <button type="button" data-toggle="dropdown" class="btn btn-link dropdown-toggle" aria-expanded="false">Tous les emplacements <span class="icon-dropdown mdi mdi-chevron-down"></span></button>
+            <ul role="menu" class="dropdown-menu">
+              <li><a href="#">Masson</a></li>
+              <li><a href="#">Fleury</a></li>
+              <li><a href="#">Mascouche</a></li>
+            </ul>
+          </div>
+          </span>
+        </div>
+        <div class="panel-body">
+
+          <app-spinner *ngIf="!product"></app-spinner>
+
+          <ul *ngIf="product && product.history && product.history.length > 0" class="user-timeline user-timeline-compact">
+            <li *ngFor="let history of product.history; let i = index;" [class.latest]="i==0">
+              <div class="user-timeline-date text-right">{{ history.createdAt | date:'mediumDate'}} </div>
+
+
+              <div *ngIf="history.inventory">
+                <div class="user-timeline-title" [class.text-success]="history.inventory.count > 0" [class.text-danger]="history.inventory.count < 0" >
+                  <span [class.mdi-long-arrow-down]="history.inventory.count < 0" [class.mdi-long-arrow-up]="history.inventory.count > 0" class="mdi"></span> {{ history.inventory.count }}
+                </div>
+
+                <div class="user-timeline-description">
+                  <span *ngIf="history.inventory.orderId">Bon de commande #{{ history.inventory.orderId }}</span>
+                  <span *ngIf="!history.inventory.orderId">Ajustement inventaire</span>
+                  <br>
+                  <i class="mdi mdi-store"></i> {{ history.inventory.location }}
+                  <br>
+                </div>
+              </div>
+
+              <div *ngIf="history.notes">
+                <div class="user-timeline-description">
+
+                    <p>
+                      {{ history.notes.content }}
+                    </p>
+                    <footer>
+                      <cite title="Source Title">- {{ history.notes.author }}</cite>
+                    </footer>
+
+                </div>
+              </div>
+            </li>
+
+          </ul>
+
+          <div *ngIf="product && (!product.history || (product.history && product.history.length < 1))" role="alert" class="alert alert-primary alert-icon alert-icon-colored alert-dismissible">
+            <div class="icon"><span class="mdi mdi-info-outline"></span></div>
+            <div class="message">
+              Aucun historique pour ce produit
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventaire -->
+    <div class="col-xs-12 col-md-4">
+
+      <div class="panel panel-full-color panel-full-dark">
+        <div class="panel-heading panel-heading-contrast">
+          Inventaire
+          <span class="panel-subtitle">
+            Par emplacement
+          </span>
+        </div>
+        <div class="panel-body">
+
+          <app-spinner *ngIf="!product"></app-spinner>
+
+          <div *ngIf="product">
+            <div class="milestone">
+
+              <div *ngFor="let inventory of product.inventory" style="margin:10px 0px 0 0 ;">
+                <span class="completed pull-right">{{ inventory.count }} / {{ inventory.threshold }}</span>
+                <span class="version"><i class="icon mdi mdi-store"></i> {{ inventory.location }}</span>
+                <div class="progress">
+                  <div [style.width]="(inventory.count/inventory.threshold*100) + '%'"  class="progress-bar"
+                       [class.progress-bar-danger]="(inventory.count/inventory.threshold) < 0.35"
+                       [class.progress-bar-warning]="(inventory.count/inventory.threshold) < 0.75"
+                       [class.progress-bar-success]="(inventory.count/inventory.threshold) >= 0.75"
+                  ></div>
+                </div>
+              </div>
+
+              <div *ngIf="product && (!product.inventory || (product.inventory && product.inventory.length < 1))" class="alert alert-primary alert-icon alert-icon-colored alert-dismissible">
+                <div class="icon"><span class="mdi mdi-info-outline"></span></div>
+                <div class="message">
+                  Aucun inventaire pour ce produit
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+      <button class="btn btn-space btn-rounded- btn-primary btn-block mt-20"><i class="icon mdi mdi-aspect-ratio-alt"></i> Ajuster l'inventaire </button>
+
+    </div>
+
+  </div>
+</div>

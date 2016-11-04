@@ -1,0 +1,79 @@
+<div class="page-head-wrapper">
+  <div class="page-head">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="pull-left">
+          <h2 class="page-head-title">Emplacements</h2>
+          <ol class="breadcrumb page-head-nav">
+            <li><a routerLink="/home"><span class="mdi mdi-home"></span></a></li>
+            <li class="active">Emplacements</li>
+          </ol>
+        </div>
+      </div>
+      <div class="col-md-4 col-md-offset-1 text-right">
+        <button (click)="addpopup.newLocationPopup()" class="btn btn-rounded- btn-primary btn-big"><i class="icon mdi mdi-plus-circle"></i> Ajouter un emplacement </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-location-edit-popup #addpopup (onSaveSuccess)="fetchLocations()"></app-location-edit-popup>
+
+<div class="main-content container-fluid" style="margin-top: 107px;">
+  <div class="row">
+    <!--Responsive table-->
+    <div class="col-sm-12">
+      <div class="panel panel-default panel-table">
+        <div class="panel-heading">
+          Liste de emplacements
+        </div>
+        <div class="panel-body">
+          <app-spinner [height]="'300px'" *ngIf="!locations"></app-spinner>
+          <table class="table table-striped table-hover" *ngIf="locations">
+            <thead>
+            <tr>
+              <th style="width:50px;">
+                <div class="be-checkbox be-checkbox-sm">
+                  <input id="check1" type="checkbox">
+                  <label for="check1"></label>
+                </div>
+              </th>
+              <th>Titre</th>
+              <th>Date modifiée</th>
+              <th style="width:100px;"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let location of locations"  [@fadeOut]="location">
+              <td>
+                <div class="be-checkbox be-checkbox-sm">
+                  <input id="check2" type="checkbox">
+                  <label for="check2"></label>
+                </div>
+              </td>
+              <td  class="cell-detail">
+                <a (click)="addpopup.popup(location)">
+                  {{ location.title }}
+                </a>
+              </td>
+              <td class="cell-detail"><span>{{ location.updatedAt | date:'mediumDate' }}</span><span class="cell-detail-description">{{ location.updatedAt | date:'mediumTime' }}</span></td>
+              <td class="text-right nobr">
+                <ul class="list-unstyled">
+                  <li>
+                    <a class="text-primary" (click)="addpopup.popup(location)"><i class="mdi mdi-edit"></i> Éditer</a>
+                  </li>
+                  <li>
+                    <a class="text-danger" (click)="deletepopup.confirmDelete(location)"><i class="mdi mdi-delete"></i> Supprimer</a>
+                  </li>
+                </ul>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-location-delete-popup #deletepopup (onDeleted)="removeLocation($event)"></app-location-delete-popup>

@@ -1,0 +1,30 @@
+<div class="be-left-sidebar">
+  <div class="left-sidebar-wrapper"><a routerLink="home" class="left-sidebar-toggle">Accueil</a>
+    <div class="left-sidebar-spacer">
+      <div class="left-sidebar-scroll">
+        <div class="left-sidebar-content">
+          <ul class="sidebar-elements">
+            <li class="divider">Inventaire</li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a><i class="icon mdi mdi-view-dashboard"></i><span>Sommaire</span></a></li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a><i class="icon mdi mdi-aspect-ratio-alt"></i><span>Ajustement</span></a></li>
+            <li routerLinkActive="active">
+              <a routerLink="products"><i class="icon mdi mdi-shape"></i><span>Produits</span></a>
+            </li>
+            <li routerLinkActive="active">
+              <a routerLink="locations"><i class="icon mdi mdi-store"></i><span>Magasins</span></a>
+            </li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a><i class="icon mdi mdi-time"></i><span>Historique</span></a></li>
+
+            <li class="divider">Bons de commande</li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a><i class="icon mdi mdi-plus-circle-o"></i><span>Créer</span></a></li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a><i class="icon mdi mdi-time"></i><span>Historique</span></a></li>
+
+            <li class="divider">Configuration</li>
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink=""><i class="icon mdi mdi-face"></i><span>Utilisateurs</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

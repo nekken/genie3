@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+
+.table > tbody > tr > td {
+    font-weight: 400;
+    vertical-align: top;
+}
+
+.page-head-wrapper{
+    z-index: 999;
+    right: 0;
+    left: 230px;
+    position:fixed;
+    top: 61px;
+}
+
+.page-head-wrapper.affix{
+    background-color: rgba(240, 240, 240, 0.90);
+}
+
+.nobr{white-space: nowrap;}
+
+a{cursor: pointer;}
+
+.alert-icon.alert-icon-colored {
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none    ;
+    box-shadow: none    ;
+}
+
+.panel-full-dark .alert-icon > .message {
+    display: table-cell;
+    padding: 18px;
+    color: #eee;
+    border: 1px solid #333;
+    border-left-width: 0;
+}
+.panel-full-dark .alert-icon {
+
+    background: #333;
+}
+
+.panel-full-dark .alert-icon.alert-icon-colored > .icon {
+    background: #3b3b3b;
+}
+
+.panel-full-dark .alert-icon.alert-icon-colored > .icon:after{
+    border-left-color: #3b3b3b;
+}

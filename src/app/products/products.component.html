@@ -1,0 +1,97 @@
+<div class="page-head-wrapper">
+<div class="page-head">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="pull-left">
+      <h2 class="page-head-title">Produits</h2>
+      <ol class="breadcrumb page-head-nav">
+        <li><a routerLink="/home"><span class="mdi mdi-home"></span></a></li>
+        <li class="active">Produits</li>
+      </ol>
+      </div>
+    </div>
+    <div class="col-md-4 col-md-offset-1 text-right">
+      <button id="btn-add-product" (click)="addpopup.newProductPopup()" class="btn btn-rounded- btn-primary btn-big"><i class="icon mdi mdi-plus-circle"></i> Ajouter un produit </button>
+    </div>
+  </div>
+</div>
+</div>
+
+<app-product-edit-popup #addpopup (onSaveSuccess)="fetchProducts()"></app-product-edit-popup>
+
+<div class="main-content container-fluid" style="margin-top: 107px;">
+<div class="row">
+  <!--Responsive table-->
+  <div class="col-sm-12">
+    <div class="panel panel-default panel-table">
+      <div class="panel-heading">
+        Liste de produits
+      </div>
+      <div class="panel-body">
+        <app-spinner [height]="'300px'" *ngIf="!products"></app-spinner>
+        <table class="table table-striped table-hover" *ngIf="products">
+          <thead>
+          <tr>
+            <th style="width:50px;">
+              <div class="be-checkbox be-checkbox-sm">
+                <input id="check1" type="checkbox">
+                <label for="check1"></label>
+              </div>
+            </th>
+            <th>SKU</th>
+            <th>Inventaire</th>
+            <th>Date modifiée</th>
+            <th style="width:100px;"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let product of products" [id]="'SKU' + product.sku">
+            <td>
+              <div class="be-checkbox be-checkbox-sm">
+                <input id="check2" type="checkbox">
+                <label for="check2"></label>
+              </div>
+            </td>
+            <td  class="cell-detail">
+              <a [routerLink]="['/products',product.id,'details']">
+                {{ product.sku }} <br>
+                {{ product.title }}
+              </a>
+            </td>
+            <td class="milestone">
+
+              <div *ngFor="let inventory of product.inventory" style="margin:10px 30px 0 0 ;">
+                <span class="completed">{{ inventory.count }} / {{ inventory.threshold }}</span>
+                <span class="version">{{ inventory.location }}</span>
+                <div class="progress">
+                  <div [style.width]="(inventory.count/inventory.threshold*100) + '%'"  class="progress-bar"
+                       [class.progress-bar-danger]="(inventory.count/inventory.threshold) < 0.35"
+                       [class.progress-bar-warning]="(inventory.count/inventory.threshold) < 0.75"
+                       [class.progress-bar-success]="(inventory.count/inventory.threshold) >= 0.75"
+                  ></div>
+                </div>
+              </div>
+
+            </td>
+            <td class="cell-detail"><span>{{ product.updatedAt | date:'mediumDate' }}</span><span class="cell-detail-description">{{ product.updatedAt | date:'mediumTime' }}</span></td>
+            <td class="text-right nobr">
+              <ul class="list-unstyled">
+                <li>
+                  <a class="text-primary" [routerLink]="['/products',product.id,'details']"><i class="mdi mdi-eye"></i> Détails</a>
+                </li>
+                <li>
+                  <a class="text-primary" (click)="addpopup.popup(product)"><i class="mdi mdi-edit"></i> Éditer</a>
+                </li>
+                <li>
+                  <a class="text-danger" (click)="moveToTrash(product)"><i class="mdi mdi-delete"></i> Supprimer</a>
+                </li>
+              </ul>
+              </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

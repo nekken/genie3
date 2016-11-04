@@ -1,0 +1,21 @@
+<!-- Nifty Modal-->
+<div id="delete" class="modal-container modal-full-color modal-full-color-danger modal-effect-12">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" data-dismiss="modal" aria-hidden="true" class="close modal-close"><span class="mdi mdi-close"></span></button>
+    </div>
+    <div class="modal-body" *ngIf="location">
+      <div class="text-center"><span class="modal-main-icon mdi mdi-close-circle-o"></span>
+        <h3>Attention!</h3>
+        <p>Êtes-vous sûr de vouloir supprimer cet item : {{location.title}}? Cette action est irréversible!</p>
+        <div class="xs-mt-50">
+          <button type="button" data-dismiss="modal" class="btn btn-default btn-space modal-close">Cancel</button>
+          <button type="button" class="btn btn-success btn-space" (click)="delete()">Oui, supprimer {{location.title}}</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer"></div>
+  </div>
+</div>
+
+<div class="modal-overlay"></div>
