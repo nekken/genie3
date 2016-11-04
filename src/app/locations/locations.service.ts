@@ -3,7 +3,7 @@ import { Headers, Http, Response} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
 
-import {Location} from "./location";
+import {Location} from "./Location";
 
 @Injectable()
 export class LocationsService{
