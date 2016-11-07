@@ -11,6 +11,9 @@ machine:
     version: 6.5
 
 dependencies:
+  pre:
+    - npm install -g portfinder
+    - npm install ms -S
   post:
     - sudo apt-get install -y x11vnc
     - x11vnc -forever -nopw:
